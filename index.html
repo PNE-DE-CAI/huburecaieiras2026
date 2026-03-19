@@ -1,0 +1,339 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hub de Ferramentas · URE-CAIEIRAS 2026</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Inter', system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background-color: #eaf7e1; /* Tom de verde claro suave */
+            color: #212121;
+            line-height: 1.5;
+        }
+
+        :root {
+            --azul-profundo: #0a2f6c;
+            --vermelho-destaque: #d32f2f;
+            --verde-claro: #d8f0d0; /* Verde claro para detalhes */
+            --preto-texto: #212121;
+            --cinza-fundo: #f5f7fa;
+            --branco-card: #ffffff;
+            --cinza-borda: #e0e4e9;
+        }
+
+        .container {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 1.5rem 2rem;
+        }
+
+        header {
+            background-color: var(--azul-profundo);
+            color: white;
+            padding: 0.6rem 0;
+            border-bottom: 4px solid var(--vermelho-destaque);
+            position: sticky;
+            top: 0;
+            z-index: 20;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+        }
+
+        .header-flex {
+            display: flex;
+            align-items: center;
+            gap: 1.5rem;
+            flex-wrap: wrap;
+        }
+
+        .logo img {
+            max-height: 58px;
+            width: auto;
+            display: block;
+            border-radius: 8px;
+            background: white;
+            padding: 4px;
+        }
+
+        .titulo-header h1 {
+            font-size: 1.8rem;
+            font-weight: 600;
+            letter-spacing: -0.02em;
+        }
+
+        .titulo-header p {
+            font-size: 1rem;
+            opacity: 0.9;
+        }
+
+        h2 {
+            font-size: 2rem;
+            font-weight: 600;
+            color: var(--azul-profundo);
+            border-left: 6px solid var(--vermelho-destaque);
+            padding-left: 1rem;
+            margin: 2rem 0 1.2rem 0;
+        }
+
+        /* Grid de cards */
+        .card-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.8rem;
+            margin: 2rem 0;
+        }
+
+        .card {
+            background: var(--branco-card);
+            border-radius: 20px;
+            padding: 1.5rem 1.5rem 2rem;
+            box-shadow: 0 10px 25px -8px rgba(0,0,0,0.08);
+            border: 1px solid var(--cinza-borda);
+            transition: transform 0.2s ease, box-shadow 0.2s ease;
+            display: flex;
+            flex-direction: column;
+            text-decoration: none;
+            color: inherit;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .card:hover {
+            transform: translateY(-6px);
+            box-shadow: 0 20px 30px -10px rgba(10, 47, 108, 0.2);
+            border-color: var(--azul-profundo);
+        }
+
+        /* Imagem do card */
+        .card-img {
+            width: 100%;
+            height: 160px;
+            object-fit: cover;
+            border-radius: 16px;
+            margin-bottom: 1.2rem;
+            background-color: var(--verde-claro);
+            border: 2px solid var(--verde-claro);
+            transition: border-color 0.2s ease;
+        }
+
+        .card:hover .card-img {
+            border-color: var(--azul-profundo);
+        }
+
+        /* Ícone alternativo (caso imagem não carregue) */
+        .card-img-placeholder {
+            background: linear-gradient(145deg, var(--verde-claro), #c0e0b0);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            color: var(--azul-profundo);
+            font-weight: 700;
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            font-weight: 600;
+            color: var(--azul-profundo);
+            margin: 0.8rem 0 0.5rem;
+            line-height: 1.3;
+        }
+
+        .card p {
+            color: #555;
+            margin-bottom: 1.2rem;
+            flex-grow: 1;
+            font-size: 0.95rem;
+        }
+
+        .card .link-indicator {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--vermelho-destaque);
+            font-weight: 600;
+            font-size: 0.9rem;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            border-bottom: 2px solid transparent;
+            transition: border-color 0.2s ease;
+            align-self: flex-start;
+            margin-top: 0.5rem;
+        }
+
+        .card:hover .link-indicator {
+            border-bottom-color: var(--vermelho-destaque);
+        }
+
+        .badge {
+            display: inline-block;
+            background-color: var(--vermelho-destaque);
+            color: white;
+            font-size: 0.75rem;
+            font-weight: 600;
+            padding: 0.25rem 0.8rem;
+            border-radius: 20px;
+            text-transform: uppercase;
+            letter-spacing: 0.4px;
+            margin-bottom: 1rem;
+        }
+
+        footer {
+            background-color: var(--preto-texto);
+            color: #ccc;
+            padding: 2rem 0;
+            margin-top: 3rem;
+            text-align: center;
+            font-size: 0.9rem;
+        }
+
+        footer a {
+            color: white;
+            text-decoration: none;
+            border-bottom: 1px dotted var(--vermelho-destaque);
+        }
+
+        @media (max-width: 700px) {
+            .container { padding: 1rem; }
+            .header-flex { flex-direction: column; align-items: start; }
+            h2 { font-size: 1.5rem; }
+        }
+    </style>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400;14..32,600;14..32,700&display=swap" rel="stylesheet">
+</head>
+<body>
+
+<header>
+    <div class="container header-flex">
+        <div class="logo">
+            <img src="https://i.ibb.co/0p01LzxB/logo3de.jpg" alt="logo SEDUC">
+        </div>
+        <div class="titulo-header">
+            <h1>Hub de Ferramentas · URE-CAIEIRAS 2026</h1>
+            <p>Acesse rapidamente as principais ferramentas e orientações da SEDUC/URE-CAIEIRAS</p>
+        </div>
+    </div>
+</header>
+
+<main class="container">
+    <h2>📌 Recursos e plataformas essenciais</h2>
+    <div class="card-grid">
+        
+        <!-- Card 1: Plataforma Educacionais -->
+        <a href="https://pne-de-cai.github.io/plataformaseducacionaisurecai/" target="_blank" class="card">
+            <img src="https://i.ibb.co/twSPtRkR/Convite-Educadores-1.jpg" alt="Plataformas Educacionais" class="card-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="card-img-placeholder" style="display: none; width: 100%; height: 160px; border-radius: 16px; margin-bottom: 1.2rem;">📚</div>
+            <h3>Plataformas Educacionais</h3>
+            <p>Acesso unificado às plataformas de aprendizagem da rede estadual.</p>
+            <span class="link-indicator">Acessar →</span>
+        </a>
+
+        <!-- Card 2: Tabulação Avaliação Diagnóstica -->
+        <a href="https://pne-de-cai.github.io/tabulacaoavaliacaodiagnostica/" target="_blank" class="card">
+            <img src="https://i.ibb.co/b56v98PY/Convite-Educadores-2.jpg" alt="Avaliação Diagnóstica" class="card-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="card-img-placeholder" style="display: none; width: 100%; height: 160px; border-radius: 16px; margin-bottom: 1.2rem;">📊</div>
+            <h3>Tabulação Avaliação Diagnóstica</h3>
+            <p>Resultados e análises das avaliações diagnósticas 2026.</p>
+            <span class="link-indicator">Acessar →</span>
+        </a>
+
+        <!-- Card 3: Prova Paulista 01 -->
+        <a href="https://pne-de-cai.github.io/prova_paulista-2026-ure-cai/" target="_blank" class="card">
+            <img src="https://i.ibb.co/7JPCWYvp/Convite-Educadores-3.jpg" alt="Prova Paulista" class="card-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="card-img-placeholder" style="display: none; width: 100%; height: 160px; border-radius: 16px; margin-bottom: 1.2rem;">📝</div>
+            <h3>Prova Paulista 01</h3>
+            <p>Materiais, gabaritos e orientações para a primeira prova.</p>
+            <span class="link-indicator">Acessar →</span>
+        </a>
+
+        <!-- Card 4: Aulas Olímpicas -->
+        <a href="https://pne-de-cai.github.io/urecaieirasolimpiadas/#" target="_blank" class="card">
+            <img src="https://i.ibb.co/4wHB3WJB/Convite-Educadores-4.jpg" alt="Aulas Olímpicas" class="card-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="card-img-placeholder" style="display: none; width: 100%; height: 160px; border-radius: 16px; margin-bottom: 1.2rem;">🏅</div>
+            <h3>Aulas Olímpicas</h3>
+            <p>Preparação para Olimpíadas com o mascote GaVa.</p>
+            <span class="link-indicator">Acessar →</span>
+        </a>
+
+        <!-- Card 5: Enturmação Anos Finais TUTOR 2026 -->
+        <a href="https://lookerstudio.google.com/reporting/91f320bf-af5e-4903-9153-be5324f257a8" target="_blank" class="card">
+            <img src="https://i.ibb.co/XfLZ15mm/Convite-Educadores-5.jpg" alt="Enturmação Tutor" class="card-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="card-img-placeholder" style="display: none; width: 100%; height: 160px; border-radius: 16px; margin-bottom: 1.2rem;">👥</div>
+            <h3>Enturmação Anos Finais TUTOR 2026</h3>
+            <p>Dashboard com situação das turmas (verde/amarelo/vermelho).</p>
+            <span class="link-indicator">Acessar →</span>
+        </a>
+
+        <!-- Card 6: Itinerário Técnico 1ª série EM -->
+        <a href="https://lookerstudio.google.com/reporting/303c3a44-89a3-4ef5-8c87-880294c894cf" target="_blank" class="card">
+            <img src="https://i.ibb.co/bjQNrjf6/Convite-Educadores-6.jpg" alt="Itinerário Técnico" class="card-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="card-img-placeholder" style="display: none; width: 100%; height: 160px; border-radius: 16px; margin-bottom: 1.2rem;">🔧</div>
+            <h3>Itinerário Técnico 1ª série EM</h3>
+            <p>Pesquisa de interesse e dados parciais 2026.</p>
+            <span class="link-indicator">Acessar →</span>
+        </a>
+
+         <!-- Card 8: projetordefrequencia2026 -->
+         <a href="https://pne-de-cai.github.io/projetordefrequencia2026/" target="_blank" class="card">
+            <img src="https://i.ibb.co/m5kGHfd6/Convite-Educadores-8.jpg" alt="Projeto Tutor" class="card-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="card-img-placeholder" style="display: none; width: 100%; height: 160px; border-radius: 16px; margin-bottom: 1.2rem;">🧑‍🏫</div>
+            <h3>Projetor de Frequências </h3>
+            <p>Ferramenta semanal de acompanhamento de frequências.</p>
+            <span class="link-indicator">Acessar →</span>
+        </a>
+
+         <!-- Card 9: URE-CAIEIRAS_PEI_2026 -->
+         <a href="https://pne-de-cai.github.io/URE-CAIEIRAS_PEI_2026/" target="_blank" class="card">
+            <img src="https://i.ibb.co/Vc8sW8cz/Convite-Educadores-9.jpg" alt="Projeto Tutor" class="card-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="card-img-placeholder" style="display: none; width: 100%; height: 160px; border-radius: 16px; margin-bottom: 1.2rem;">🧑‍🏫</div>
+            <h3>URE-CAIEIRAS JORNADA PEI 2026 </h3>
+            <p>Orientações e materiais para PEI.</p>
+            <span class="link-indicator">Acessar →</span>
+        </a>
+        <!-- Card 7: Projeto Tutor Anos Finais 2026 -->
+        <a href="https://pne-de-cai.github.io/projetotutores2026/" target="_blank" class="card">
+            <img src="https://i.ibb.co/1G2StJZD/Convite-Educadores-7.jpg" alt="Projeto Tutor" class="card-img" onerror="this.style.display='none'; this.nextElementSibling.style.display='flex';">
+            <div class="card-img-placeholder" style="display: none; width: 100%; height: 160px; border-radius: 16px; margin-bottom: 1.2rem;">🧑‍🏫</div>
+            <h3>Projeto Tutor Anos Finais 2026</h3>
+            <p>Orientações e materiais para tutores.</p>
+            <span class="link-indicator">Acessar →</span>
+        </a>
+    </div>
+
+    <!-- Nota explicativa (opcional, com tom verde) -->
+    <div style="background-color: #e0f0d8; border-left: 6px solid #0a2f6c; padding: 1.5rem; border-radius: 16px; margin: 2rem 0;">
+        <p style="font-size: 1.1rem; color: #0a2f6c; font-weight: 500;">🌟 <strong>Hub em constante atualização</strong> — os links direcionam para as plataformas oficiais da SEDUC e URE Caieiras. Clique em qualquer card para acessar o conteúdo.</p>
+    </div>
+</main>
+
+<footer>
+    <div class="container">
+        <p>Secretaria da Educação do Estado de São Paulo · Diretoria de Ensino – URE Caieiras</p>
+        <p>Hub desenvolvido com base no guia de plataformas 2026 · versão 1.0</p>
+        <p>Central de Atendimento: 0800 77 000 12 | <a href="#">atendimento.educacao.sp.gov.br</a></p>
+        <p style="margin-top: 1.5rem; font-size: 0.85rem; color: #aaa;"></p>
+    </div>
+</footer>
+
+<script>
+    // Pequeno script para fallback das imagens
+    document.querySelectorAll('.card-img').forEach(img => {
+        img.addEventListener('error', function() {
+            this.style.display = 'none';
+            const placeholder = this.nextElementSibling;
+            if (placeholder && placeholder.classList.contains('card-img-placeholder')) {
+                placeholder.style.display = 'flex';
+            }
+        });
+    });
+</script>
+</body>
+</html>
